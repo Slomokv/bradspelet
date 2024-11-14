@@ -8,17 +8,17 @@ public class Player {
     private int[][] stats; 
 
 
-    public Player(String name, char symbol, boolean isHuman) {
+    public Player(String name, char symbol, boolean isHuman, int amountOfGames) {
         this.name = name;
         this.symbol = symbol;
         this.isHuman = isHuman;
-        stats = new int[3][3]; // 3 gamemodes, 3 stats = {wins, draws, losses}
+        stats = new int[amountOfGames][3]; // Amount of implemented gamemodes, 3 stats = {wins, draws, losses}
 
     }
 
     //-------New players-------
 
-    public Player addPlayer(char symbol, boolean isHuman) {
+    public Player addPlayer(char symbol, boolean isHuman, int amountOfGames) {
         Scanner scanner = new Scanner(System.in);
         String name = ("Player " + (1 + Game.length(playerList)));
         
@@ -39,7 +39,7 @@ public class Player {
             continue;
         }
         scanner.close();
-        return new Player(name, symbol, isHuman);
+        return new Player(name, symbol, isHuman, amountOfGames);
     }
 
     public String chooseName() {
@@ -47,7 +47,6 @@ public class Player {
         String name = scanner.nextLine();
         scanner.close();
         return name;
-
     }
 
     //-------Name, Symbol and isHuman-------
@@ -58,7 +57,6 @@ public class Player {
     public void setName(String name) {
         this.name = name;
     }
-
     public char getSymbol() {
         return symbol;
     }
@@ -97,7 +95,7 @@ public class Player {
         this.stats[gameMode][1] =+ 1;
     }
     public void hasLost(int gameMode) {
-        this.stats[gameMode][2] =- 1;
+        this.stats[gameMode][2] =+ 1;
     }
 
 }
